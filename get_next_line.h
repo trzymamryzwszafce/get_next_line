@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: szmadeja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/16 18:25:41 by szmadeja          #+#    #+#             */
-/*   Updated: 2025/01/18 18:54:04 by szmadeja         ###   ########.fr       */
+/*   Created: 2025/01/18 18:54:16 by szmadeja          #+#    #+#             */
+/*   Updated: 2025/01/18 18:56:50 by szmadeja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-char	*get_next_line(int fd)
-{
-	static char	*storage;
-	char	*line;
+# include <unistd.h>
+# include <stdlib.h>
 
-	if (
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
+
+char	*get_next_line(int fd);
+
+#endif
