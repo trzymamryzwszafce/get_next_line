@@ -6,11 +6,19 @@
 /*   By: szmadeja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:25:41 by szmadeja          #+#    #+#             */
-/*   Updated: 2025/01/27 20:12:51 by szmadeja         ###   ########.fr       */
+/*   Updated: 2025/01/27 20:32:48 by szmadeja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+char	*joinfree(char *storage, char *temp)
+{
+	temp = storage;
+	ft_strjoin(storage, temp);
+	free(temp);
+	return (storage);
+}
 
 char	*lineread(char *storage, int fd)
 {
@@ -23,7 +31,7 @@ char	*lineread(char *storage, int fd)
 		temp = malloc(BUFFER_SIZE + 1);
 		if (!temp)
 			return (NULL);
-		i = read(fd, temp, BUFFER_SIZE);
+		i = read(fd, storage, BUFFER_SIZE);
 		if (i == -1)
 		{
 			free (temp);
@@ -45,3 +53,4 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
+}
