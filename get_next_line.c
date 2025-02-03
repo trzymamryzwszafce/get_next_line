@@ -12,7 +12,7 @@
 
 #include "get_next_line.h"
 
-static char	*new_storage(char *line)
+char	*new_storage(char *line)
 {
 	int		i;
 	char	*new;
@@ -34,7 +34,7 @@ static char	*new_storage(char *line)
 	return (new);
 }
 
-static char	*lineread(int fd, char *storage, char *buf)
+char	*lineread(int fd, char *storage, char *buf)
 {
 	int		i;
 	char	*temp;
@@ -74,8 +74,6 @@ char	*get_next_line(int fd)
 	{
 		free(storage);
 		free(buf);
-		storage = NULL;
-		buf = NULL;
 		return (NULL);
 	}
 	if (!buf)
