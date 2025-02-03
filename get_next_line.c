@@ -6,7 +6,7 @@
 /*   By: szmadeja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:25:41 by szmadeja          #+#    #+#             */
-/*   Updated: 2025/01/27 20:32:48 by szmadeja         ###   ########.fr       */
+/*   Updated: 2025/02/03 17:19:57 by szmadeja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char	*get_next_line(int fd)
 	char		*buf;
 
 	buf = malloc(BUFFER_SIZE + 1);
-	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, 0, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE < 1)
 	{
 		free(storage);
 		free(buf);
