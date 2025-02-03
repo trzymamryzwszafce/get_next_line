@@ -6,7 +6,7 @@
 /*   By: szmadeja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/16 18:25:41 by szmadeja          #+#    #+#             */
-/*   Updated: 2025/02/03 17:19:57 by szmadeja         ###   ########.fr       */
+/*   Updated: 2025/02/03 19:49:39 by szmadeja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ char	*get_next_line(int fd)
 	{
 		free(storage);
 		free(buf);
+		storage = NULL;
+		buf = NULL;
 		return (NULL);
 	}
 	if (!buf)
