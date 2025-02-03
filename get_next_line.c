@@ -12,36 +12,53 @@
 
 #include "get_next_line.h"
 
-char	*joinfree(char *storage, char *temp)
+static char	*new_storage(char *line)
 {
-	temp = storage;
-	ft_strjoin(storage, temp);
-	free(temp);
-	return (storage);
+	int		i;
+	char	*new;
+
+	i = 0;
+	while (line[i] && line[i] != '\n')
+		i++;
+	if (line[i] == '\0' || line[1] == '\0')
+	{
+		return (NULL);
+	}
+	new = ft_substr(line, i + 1, ft_strlen(line) - i);
+	if (*new == 0)
+	{
+		free(new);
+		return (NULL);
+	}
+	line[i + 1] = '\0';
+	return (new);
 }
 
-char	*lineread(char *storage, int fd)
+static char	*lineread(int fd, char *storage, char *buf)
 {
 	int		i;
 	char	*temp;
 
-	i = 1
+	i = 1;
 	while (i > 0)
 	{
-		temp = malloc(BUFFER_SIZE + 1);
-		if (!temp)
-			return (NULL);
-		i = read(fd, storage, BUFFER_SIZE);
+		i = read(fd, buf, BUFFER_SIZE);
 		if (i == -1)
 		{
-			free (temp);
+			free(storage);
 			return (NULL);
 		}
-		temp[i] = '\0';
-		if (strchr(storage, '\n'))
+		else if (i == 0)
 			break ;
-
-		joinfree(storage, temp);
+		buf[i] = '\0';
+		if (!storage)
+			storage = ft_strdup("");
+		temp = storage;
+		storage = ft_strjoin(temp, buf);
+		free(temp);
+		temp = NULL;
+		if (ft_strchr(buf, '\n'))
+			break ;
 	}
 	return (storage);
 }
@@ -49,8 +66,25 @@ char	*lineread(char *storage, int fd)
 char	*get_next_line(int fd)
 {
 	static char	*storage;
-	char	*line;
+	char		*line;
+	char		*buf;
 
-	if (fd < 0 || BUFFER_SIZE < 1)
+	buf = malloc(BUFFER_SIZE + 1);
+	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, 0, 0) < 0)
+	{
+		free(storage);
+		free(buf);
+		storage = NULL;
+		buf = NULL;
 		return (NULL);
+	}
+	if (!buf)
+		return (NULL);
+	line = lineread(fd, storage, buf);
+	free(buf);
+	buf = NULL;
+	if (!line)
+		return (NULL);
+	storage = new_storage(line);
+	return (line);
 }
