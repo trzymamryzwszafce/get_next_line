@@ -71,7 +71,7 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE < 1)
 	{
-		free(storage);
+//		free(storage);
 //		if (buf)
 //		free(buf);
 		return (NULL);
