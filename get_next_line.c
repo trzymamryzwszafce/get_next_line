@@ -45,7 +45,7 @@ char	*lineread(int fd, char *storage, char *buf)
 		i = read(fd, buf, BUFFER_SIZE);
 		if (i == -1)
 		{
-			free(storage);
+//			free(storage);
 			return (NULL);
 		}
 		else if (i == 0)
