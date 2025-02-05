@@ -69,15 +69,14 @@ char	*get_next_line(int fd)
 	char		*line;
 	char		*buf;
 
-	buf = malloc(BUFFER_SIZE + 1);
 	if (fd < 0 || BUFFER_SIZE < 1)
 	{
 		free(storage);
-		free(buf);
-		storage = NULL;
-		buf = NULL;
+//		if (buf)
+//		free(buf);
 		return (NULL);
 	}
+	buf = malloc(BUFFER_SIZE + 1); 
 	if (!buf)
 		return (NULL);
 	line = lineread(fd, storage, buf);
