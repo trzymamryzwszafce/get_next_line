@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: szmadeja <szmadeja@student.42.fr>          +#+  +:+       +#+        */
+/*   By: szmadeja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/16 18:25:41 by szmadeja          #+#    #+#             */
-/*   Updated: 2025/02/05 16:17:53 by szmadeja         ###   ########.fr       */
+/*   Created: 2025/02/05 18:38:05 by szmadeja          #+#    #+#             */
+/*   Updated: 2025/02/05 18:38:49 by szmadeja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,14 @@ char	*new_storage(char *line)
 	while (line[i] && line[i] != '\n')
 		i++;
 	if (line[i] == '\0' || line[1] == '\0')
+	{
 		return (NULL);
+	}
 	new = ft_substr(line, i + 1, ft_strlen(line) - i);
 	if (*new == 0)
 	{
 		free(new);
 		new = NULL;
-		return (NULL);
 	}
 	line[i + 1] = '\0';
 	return (new);
@@ -38,12 +39,17 @@ char	*lineread(int fd, char *storage, char *buf)
 	int		i;
 	char	*temp;
 
-	//i = 1;
-	i = read(fd, buf, BUFFER_SIZE);
+	i = 1;
 	while (i > 0)
 	{
-//		else if (i == 0)
-//			break ;
+		i = read(fd, buf, BUFFER_SIZE);
+		if (i == -1)
+		{
+			free(storage);
+			return (NULL);
+		}
+		else if (i == 0)
+			break ;
 		buf[i] = '\0';
 		if (!storage)
 			storage = ft_strdup("");
@@ -53,12 +59,6 @@ char	*lineread(int fd, char *storage, char *buf)
 		temp = NULL;
 		if (ft_strchr(buf, '\n'))
 			break ;
-		i = read(fd, buf, BUFFER_SIZE);
-	}
-	if (i == -1)
-	{
-		free(storage);
-		return (NULL);
 	}
 	return (storage);
 }

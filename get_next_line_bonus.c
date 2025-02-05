@@ -6,7 +6,7 @@
 /*   By: szmadeja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 17:12:05 by szmadeja          #+#    #+#             */
-/*   Updated: 2025/02/03 17:12:17 by szmadeja         ###   ########.fr       */
+/*   Updated: 2025/02/05 18:39:17 by szmadeja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	*get_next_line(int fd)
 		storage[fd] = NULL;
 		return (NULL);
 	}
-	buf = malloc(BUFFER_SIZE + 1); 
+	buf = malloc(BUFFER_SIZE + 1);
 	if (!buf)
 		return (NULL);
 	line = lineread(fd, storage[fd], buf);
