@@ -6,7 +6,7 @@
 /*   By: szmadeja <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/05 18:38:05 by szmadeja          #+#    #+#             */
-/*   Updated: 2025/02/05 18:38:49 by szmadeja         ###   ########.fr       */
+/*   Updated: 2025/02/05 20:08:14 by szmadeja         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char	*new_storage(char *line)
 		i++;
 	if (line[i] == '\0' || line[1] == '\0')
 	{
+		free(line);
 		return (NULL);
 	}
 	new = ft_substr(line, i + 1, ft_strlen(line) - i);
@@ -71,8 +72,8 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE < 1)
 	{
-		free (storage);
-		storage = NULL;
+//		free (storage);
+//		storage = NULL;
 		return (NULL);
 	}
 	buf = malloc(BUFFER_SIZE + 1);
@@ -82,7 +83,11 @@ char	*get_next_line(int fd)
 	free(buf);
 	buf = NULL;
 	if (!line)
+	{
+		free(storage);
+		storage = NULL;
 		return (NULL);
+	}
 	storage = new_storage(line);
 	return (line);
 }
