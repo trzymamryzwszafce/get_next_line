@@ -45,11 +45,12 @@ char	*lineread(int fd, char *storage, char *buf)
 		i = read(fd, buf, BUFFER_SIZE);
 		if (i == -1)
 		{
-//			free(storage);
+			free(storage);
+			free(buf);
 			return (NULL);
 		}
-		else if (i == 0)
-			break ;
+//		else if (i == 0)
+//			break ;
 		buf[i] = 0;
 		if (!storage)
 			storage = ft_strdup("");
