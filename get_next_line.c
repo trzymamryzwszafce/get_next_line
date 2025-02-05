@@ -50,7 +50,7 @@ char	*lineread(int fd, char *storage, char *buf)
 		}
 		else if (i == 0)
 			break ;
-		buf[i] = '\0';
+		buf[i] = 0;
 		if (!storage)
 			storage = ft_strdup("");
 		temp = storage;
