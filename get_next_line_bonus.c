@@ -28,7 +28,7 @@ char	*new_storage(char *line)
 	if (*new == 0)
 	{
 		free(new);
-		return (NULL);
+		new = NULL;
 	}
 	line[i + 1] = '\0';
 	return (new);
@@ -69,13 +69,13 @@ char	*get_next_line(int fd)
 	char		*line;
 	char		*buf;
 
-	buf = malloc(BUFFER_SIZE + 1);
-	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, 0, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE < 1)
 	{
 		free(storage[fd]);
-		free(buf);
+		storage[fd] = NULL;
 		return (NULL);
 	}
+	buf = malloc(BUFFER_SIZE + 1); 
 	if (!buf)
 		return (NULL);
 	line = lineread(fd, storage[fd], buf);
